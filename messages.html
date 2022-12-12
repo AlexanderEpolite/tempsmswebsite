@@ -62,8 +62,8 @@
     //replace the first character of the number with a +
     number = "+" + number.substring(1);
     
-    if(number === null) {
-        //if the number is null, redirect to the index page
+    //if the number is null, redirect to the index page
+    if(!number) {
         window.location.href = "/";
     }
     
@@ -109,7 +109,8 @@
                     const messageCell = row.insertCell();
                     const timeCell = row.insertCell();
                     fromCell.innerText = formatNumber(message.from);
-                    messageCell.innerText = message.content;
+                    //replace all + signs with spaces
+                    messageCell.innerText = message.content.replace(/\+/g, " ");
                     timeCell.innerText = formatDate(new Date(Number(message.time) ?? 0));
                 });
             }
