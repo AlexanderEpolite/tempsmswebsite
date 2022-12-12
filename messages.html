@@ -11,17 +11,21 @@
     <meta name="author" content="Temp-SMS.app">
     <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="/css/all.css">
+    <link rel="stylesheet" href="/css/inbox.css">
 </head>
 <body>
-<h1 id="messages_header">[Loading...]</h1>
+<div class="center">
+    <h1 id="messages_header">[Loading...]</h1>
+</div>
 <div id="messages">
-    <h2 id="message_area">[Loading...]</h2>
-    <table>
-        <tr>
-            <th>From</th>
-            <th>Message</th>
-        </tr>
-    </table>
+    <section class="inbox_container">
+        <table>
+            <tr>
+                <th>From</th>
+                <th>Message</th>
+            </tr>
+        </table>
+    </section>
 </div>
 </body>
 <script>
@@ -30,7 +34,7 @@
         //remove the leading +1 from the number
         number = number.substring(2);
         //add parentheses around the area code
-        number = "(" + number.substring(0, 3) + ") " + number.substring(3);
+        number = `(${number.substring(0, 3)}) ${number.substring(3)}`;
         //add a dash between the first three digits and the last four digits
         number = number.substring(0, 9) + "-" + number.substring(9);
         return number;
