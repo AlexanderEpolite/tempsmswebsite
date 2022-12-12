@@ -24,6 +24,7 @@
             <tr>
                 <th>From</th>
                 <th>Message</th>
+                <th>Time</th>
             </tr>
         </table>
     </section>
@@ -63,6 +64,7 @@
                     <tr>
                         <th>From</th>
                         <th>Message</th>
+                        <th>Time</th>
                     </tr>
                 `;
                 document.getElementById("message_area").innerText = "";
@@ -71,8 +73,10 @@
                     const row = table.insertRow();
                     const fromCell = row.insertCell();
                     const messageCell = row.insertCell();
+                    const timeCell = row.insertCell();
                     fromCell.innerText = formatNumber(message.from);
                     messageCell.innerText = message.content;
+                    timeCell.innerText = new Date(Number(message.time) ?? 0).toString();
                 });
             }
         });
