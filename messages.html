@@ -20,7 +20,7 @@
 <div id="messages">
     <h2 id="message_area">[Loading...]</h2>
     <section class="inbox_container">
-        <table>
+        <table id="message_table">
             <tr>
                 <th>From</th>
                 <th>Message</th>
@@ -51,22 +51,36 @@
     //replace the first character of the number with a +
     number = "+" + number.substring(1);
     
-    //get the messages from the server
-    fetch("https://brandon.temp-sms.app/get/" + number).then(r => r.json()).then((json) => {
-        console.log(json);
-        if (json.length === 0) {
-            document.getElementById("message_area").innerText = "No messages.";
-        } else {
-            document.getElementById("message_area").innerText = "";
-            const table = document.getElementsByTagName("table")[0];
-            json.forEach((message) => {
-                const row = table.insertRow();
-                const fromCell = row.insertCell();
-                const messageCell = row.insertCell();
-                fromCell.innerText = formatNumber(message.from);
-                messageCell.innerText = message.content;
-            });
-        }
-    });
+    function refresh() {
+        //clear the table
+        document.getElementById("message_table").innerHTML = `
+            <tr>
+                <th>From</th>
+                <th>Message</th>
+            </tr>
+        `;
+        
+        //get the messages from the server
+        fetch("https://brandon.temp-sms.app/get/" + number).then(r => r.json()).then((json) => {
+            console.log(json);
+            if (json.length === 0) {
+                document.getElementById("message_area").innerText = "No messages.";
+            } else {
+                document.getElementById("message_area").innerText = "";
+                const table = document.getElementsByTagName("table")[0];
+                json.forEach((message) => {
+                    const row = table.insertRow();
+                    const fromCell = row.insertCell();
+                    const messageCell = row.insertCell();
+                    fromCell.innerText = formatNumber(message.from);
+                    messageCell.innerText = message.content;
+                });
+            }
+        });
+    }
+    
+    refresh();
+    
+    setInterval(() => refresh(), 5000);
 </script>
 </html>
