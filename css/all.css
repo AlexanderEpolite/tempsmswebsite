@@ -1,8 +1,6 @@
 
 html {
-    /*background-color: #0d1117;*/
-    /*gradient background*/
-    background: -moz-linear-gradient(25deg, #000000 0%, #ffffff 100%);
+    background-color: #0d1117;
     color: #ffffff;
     font-family: "Ubuntu", serif;
 }
