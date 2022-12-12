@@ -38,10 +38,14 @@
     
     //get the number from the URL (format: /messages?number=+1XXXXXXXXXX)
     const urlParams = new URLSearchParams(window.location.search);
-    const number = urlParams.get('number');
+    let number = urlParams.get('number');
     
     document.getElementById("messages_header").innerText = `Messages for ${formatNumber(number)}`;
     console.log(`Messages for ${number}`);
+    
+    //replace the first character of the number with a +
+    number = "+" + number.substring(1);
+    
     //get the messages from the server
     fetch("https://brandon.temp-sms.app/get/" + number).then(r => r.json()).then((json) => {
         console.log(json);
