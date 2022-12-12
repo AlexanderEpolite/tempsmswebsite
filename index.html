@@ -16,6 +16,15 @@
         //     "+15625738162",
         //     "+13433384154",
         // ];
+        function formatNumber(number) {
+            //remove the leading +1 from the number
+            number = number.substring(2);
+            //add parentheses around the area code
+            number = `(${number.substring(0, 3)}) ${number.substring(3)}`;
+            //add a dash between the first three digits and the last four digits
+            number = number.substring(0, 9) + "-" + number.substring(9);
+            return number;
+        }
         
         const numbers = [
             {
@@ -24,7 +33,7 @@
             },
             {
                 number: "+13433384154",
-                archived: false,
+                archived: true,
             }
         ];
         
@@ -39,17 +48,35 @@
     Click on a number to view its messages.
 </p>
 <div id="numbers">
-    
+    <h2>Phone numbers</h2>
+</div>
+<br><br>
+<div id="archived_numbers">
+    <h2>Archived Numbers</h2>
+    <p>
+        The numbers listed below are archived.  They will not receive new messages.
+    </p>
 </div>
 </body>
 <script>
+    // numbers.forEach((n) => {
+    //     const a = document.createElement("a");
+    //     a.href = `/messages.html?number=${n}`;
+    //     a.innerText = n;
+    //     document.getElementById("numbers").appendChild(a);
+    //     document.getElementById("numbers").appendChild(document.createElement("br"));
+    //     document.getElementById("numbers").appendChild(document.createElement("br"));
+    // });
+    
     numbers.forEach((n) => {
         const a = document.createElement("a");
-        a.href = `/messages.html?number=${n}`;
-        a.innerText = n;
-        document.getElementById("numbers").appendChild(a);
-        document.getElementById("numbers").appendChild(document.createElement("br"));
-        document.getElementById("numbers").appendChild(document.createElement("br"));
+        a.href = `/messages.html?number=${n.number}`;
+        a.innerText = formatNumber(n.number);
+        const whichdiv = n.archived ? "archived_numbers" : "numbers";
+        const div = document.getElementById(whichdiv);
+        div.appendChild(a);
+        div.appendChild(document.createElement("br"));
+        div.appendChild(document.createElement("br"));
     });
 </script>
 </html>
