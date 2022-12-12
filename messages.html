@@ -62,14 +62,21 @@
     if(number === null) {
         //if the number is null, redirect to the index page
         window.location.href = "/";
-    } else if(!numbers.some(n => n.number === number)) {
-        //if the number is not in the list of numbers, redirect to the index page
-        window.location.href = "/";
     }
     
-    //if archived
-    if(numbers.find(n => n.number === number).archived) {
+    //if the number is not in the list of numbers, redirect to the index page
+    for(let i = 0; i < numbers.length; i++) {
+        if(numbers[i].number === number) {
+            //if the number is archived, show the archived warning
+            if(numbers[i].archived) {
+                document.getElementById("archived_warning").hidden = false;
+            }
+            break;
+        }
         
+        if(i === numbers.length - 1) {
+            window.location.href = "/";
+        }
     }
     
     document.getElementById("messages_header").innerText = `Messages for ${formatNumber(number)}`;
