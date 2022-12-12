@@ -52,20 +52,19 @@
     number = "+" + number.substring(1);
     
     function refresh() {
-        //clear the table
-        document.getElementById("message_table").innerHTML = `
-            <tr>
-                <th>From</th>
-                <th>Message</th>
-            </tr>
-        `;
-        
         //get the messages from the server
         fetch("https://brandon.temp-sms.app/get/" + number).then(r => r.json()).then((json) => {
             console.log(json);
             if (json.length === 0) {
                 document.getElementById("message_area").innerText = "No messages.";
             } else {
+                //clear the table
+                document.getElementById("message_table").innerHTML = `
+                    <tr>
+                        <th>From</th>
+                        <th>Message</th>
+                    </tr>
+                `;
                 document.getElementById("message_area").innerText = "";
                 const table = document.getElementsByTagName("table")[0];
                 json.forEach((message) => {
