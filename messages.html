@@ -41,7 +41,7 @@
     const number = urlParams.get('number');
     
     document.getElementById("messages_header").innerText = `Messages for ${formatNumber(number)}`;
-    
+    console.log(`Messages for ${number}`);
     //get the messages from the server
     fetch("https://brandon.temp-sms.app/get/" + number).then(r => r.json()).then((json) => {
         console.log(json);
