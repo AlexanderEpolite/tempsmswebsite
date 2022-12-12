@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Temp SMS Online</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="description" content="Temp SMS Online is a free service that allows you to receive SMS messages online.">
+    <meta name="keywords" content="Temp SMS Online, Temp SMS, Temp SMS Online Free, Temp SMS Online Free Service, Temp SMS Online Receive SMS, Temp SMS Online Receive SMS Online, Temp SMS Online Receive SMS Online Free, Temp SMS Online Receive SMS Online Free Service">
+    <meta name="author" content="Temp-SMS.app">
+    <meta name="robots" content="index, follow">
+    <script>
+        
+        const numbers = [
+            "+15625738162",
+            "+13433384154",
+        ];
+        
+    </script>
+    <link rel="stylesheet" href="/css/all.css">
+</head>
+<body>
+<h1>
+    Temp SMS Beta
+</h1>
+<p>
+    Click on a number to view its messages.
+</p>
+<div id="numbers">
+    
+</div>
+</body>
+<script>
+    numbers.forEach((n) => {
+        const a = document.createElement("a");
+        a.href = `/messages?number=${n}`;
+        a.innerText = n;
+        document.getElementById("numbers").appendChild(a);
+        document.getElementById("numbers").appendChild(document.createElement("br"));
+        document.getElementById("numbers").appendChild(document.createElement("br"));
+    });
+</script>
+</html>

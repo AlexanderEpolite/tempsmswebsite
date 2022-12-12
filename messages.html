@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Messages</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="description" content="Temp SMS Online is a free service that allows you to receive SMS messages online.">
+    <meta name="keywords" content="Temp SMS Online, Temp SMS, Temp SMS Online Free, Temp SMS Online Free Service, Temp SMS Online Receive SMS, Temp SMS Online Receive SMS Online, Temp SMS Online Receive SMS Online Free, Temp SMS Online Receive SMS Online Free Service">
+    <meta name="author" content="Temp-SMS.app">
+    <meta name="robots" content="index, follow">
+    <link rel="stylesheet" href="/css/all.css">
+</head>
+<body>
+<h1 id="messages_header">[Loading...]</h1>
+<div id="messages">
+    <h2 id="message_area">[Loading...]</h2>
+    <table>
+        <tr>
+            <th>From</th>
+            <th>Message</th>
+        </tr>
+    </table>
+</div>
+</body>
+<script>
+    
+    function formatNumber(number) {
+        //remove the leading +1 from the number
+        number = number.substring(2);
+        //add parentheses around the area code
+        number = "(" + number.substring(0, 3) + ") " + number.substring(3);
+        //add a dash between the first three digits and the last four digits
+        number = number.substring(0, 9) + "-" + number.substring(9);
+        return number;
+    }
+    
+    //get the number from the URL (format: /messages?number=+1XXXXXXXXXX)
+    const urlParams = new URLSearchParams(window.location.search);
+    const number = urlParams.get('number');
+    
+    document.getElementById("messages_header").innerText = `Messages for ${formatNumber(number)}`;
+    
+    //get the messages from the server
+    fetch("https://brandon.temp-sms.app/get/" + number).then(r => r.json()).then((json) => {
+        console.log(json);
+    });
+</script>
+</html>
