@@ -59,7 +59,8 @@
     const urlParams = new URLSearchParams(window.location.search);
     let number = urlParams.get('number');
     
-    console.log(number);
+    //replace the first character of the number with a +
+    number = "+" + number.substring(1);
     
     if(number === null) {
         //if the number is null, redirect to the index page
@@ -77,16 +78,13 @@
         }
         
         if(i === numbers.length - 1) {
-            // window.location.href = "/";
-            console.log(`Number ${number} not found.`);
+            window.location.href = "/";
+            // console.log(`Number ${number} not found.`);
         }
     }
     
     document.getElementById("messages_header").innerText = `Messages for ${formatNumber(number)}`;
     console.log(`Messages for ${number}`);
-    
-    //replace the first character of the number with a +
-    number = "+" + number.substring(1);
     
     function refresh() {
         //get the messages from the server
