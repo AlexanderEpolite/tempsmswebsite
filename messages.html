@@ -12,10 +12,23 @@
     <meta name="robots" content="index, follow">
     <link rel="stylesheet" href="/css/all.css">
     <link rel="stylesheet" href="/css/inbox.css">
+    <script>
+        const numbers = [
+            {
+                number: "+15625738162",
+                archived: false,
+            },
+            {
+                number: "+13433384154",
+                archived: false,
+            }
+        ];
+    </script>
 </head>
 <body>
 <div class="center">
     <h1 id="messages_header">[Loading...]</h1>
+    <h2 hidden id="archived_warning" class="archived_warning">This number is archived.  It will no longer receive new messages.</h2>
 </div>
 <div id="messages">
     <h2 id="message_area">[Loading...]</h2>
@@ -45,6 +58,19 @@
     //get the number from the URL (format: /messages?number=+1XXXXXXXXXX)
     const urlParams = new URLSearchParams(window.location.search);
     let number = urlParams.get('number');
+    
+    if(number === null) {
+        //if the number is null, redirect to the index page
+        window.location.href = "/";
+    } else if(!numbers.some(n => n.number === number)) {
+        //if the number is not in the list of numbers, redirect to the index page
+        window.location.href = "/";
+    }
+    
+    //if archived
+    if(numbers.find(n => n.number === number).archived) {
+        
+    }
     
     document.getElementById("messages_header").innerText = `Messages for ${formatNumber(number)}`;
     console.log(`Messages for ${number}`);
