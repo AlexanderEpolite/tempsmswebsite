@@ -45,6 +45,19 @@
     //get the messages from the server
     fetch("https://brandon.temp-sms.app/get/" + number).then(r => r.json()).then((json) => {
         console.log(json);
+        if (json.length === 0) {
+            document.getElementById("message_area").innerText = "No messages.";
+        } else {
+            document.getElementById("message_area").innerText = "";
+            const table = document.getElementsByTagName("table")[0];
+            json.forEach((message) => {
+                const row = table.insertRow();
+                const fromCell = row.insertCell();
+                const messageCell = row.insertCell();
+                fromCell.innerText = formatNumber(message.from);
+                messageCell.innerText = message.content;
+            });
+        }
     });
 </script>
 </html>
